@@ -77,7 +77,7 @@ set autoread                      " Automatically re-read files changed outside 
 
 set t_Co=256 " 256 colors
 set background=dark
-colorscheme Tomorrow-Night-Bright
+colorscheme grb3
 
 set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 
