@@ -4,8 +4,13 @@ set nocompatible                  " Must come first because it changes other opt
 silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()
 
-" Shares the clipboard with OS X
-set clipboard=unnamed
+" set clipboard sharing for Linux and mac
+let s:uname = system("echo -n \"$(uname)\"")
+if !v:shell_error && s:uname == "Linux"
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamed
+end
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
@@ -77,7 +82,7 @@ set autoread                      " Automatically re-read files changed outside 
 
 set t_Co=256 " 256 colors
 set background=dark
-colorscheme grb3
+colorscheme badwolf
 
 set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 
