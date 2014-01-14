@@ -9,7 +9,9 @@ let s:uname = system("echo -n \"$(uname)\"")
 if !v:shell_error && s:uname == "Linux"
   set clipboard=unnamedplus
 else
-  set clipboard=unnamed
+  if $TMUX == ''
+    set clipboard=unnamed
+  end
 end
 
 syntax enable                     " Turn on syntax highlighting.
