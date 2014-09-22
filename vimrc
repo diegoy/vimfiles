@@ -160,6 +160,7 @@ map  <Left>  :bprev<CR>
 imap <Right> <ESC>:bnext<CR>
 imap <Left>  <ESC>:bprev<CR>
 map  <Del>   :bd<CR>
+map  <Leader>lb   :e#<CR>
 
 " Show tabs and trailing whitespace visually
 " http://github.com/ciaranm/dotfiles-ciaranm/blob/master/vimrc
