@@ -12,6 +12,9 @@ After a fresh clone of this repository, get the submodules with:
     git submodule init
     git submodule update
 
+To Update all submodules
+    git submodule foreach git pull origin master
+
 (See [Git Submodules: Adding, Using, Removing, Updating](http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/) for more information.)
 
 If after `call pathogen#helptags()` you get a warning about a dirty submodule,
