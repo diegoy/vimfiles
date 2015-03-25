@@ -81,7 +81,7 @@ set noequalalways                 " Resize windows as little as possible.
 set autoread                      " Automatically re-read files changed outside Vim.
 
 set t_Co=256 " 256 colors
-set background=dark
+set background=light
 colorscheme solarized
 
 set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
