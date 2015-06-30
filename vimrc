@@ -259,19 +259,6 @@ map <leader>n :call RenameFile()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
-"map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-"map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-"map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-"map <leader>gp :CommandTFlush<cr>\|:CommandT app/presenters<cr>
-"map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-"map <leader>gC :CommandTFlush<cr>\|:CommandT config<cr>
-"map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-"map <leader>gs :CommandTFlush<cr>\|:CommandT spec<cr>
-"map <leader>gg :topleft 100 :split Gemfile<cr>
-"map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-"map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
-"map <leader>T :CommandTFlush<cr>\|:CommandT %%<cr>
 map <leader>t :CtrlP .<cr>
 map <leader>T :CtrlP .<cr>
 
@@ -298,84 +285,6 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>l :PromoteToLet<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RunTests(filename)
-    " Write the file and run tests for the given filename
-    :w
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
-    else
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        else
-            exec ":!rspec --color " . a:filename
-        end
-    end
-endfunction
-
-function! SetTestFile()
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@%
-endfunction
-
-function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
-
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-    if in_test_file
-        call SetTestFile()
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunTestFileNoRails()
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-    if in_test_file
-       call SetTestFile()
-       :w
-       exec ":!rspec --color " . t:grb_test_file
-    end
-endfunction
-
-function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number . " -b")
-endfunction
-
-map <leader>s :call RunTestFile()<cr>
-map <leader>S :call RunNearestTest()<cr>
-map <leader>b :call RunTestFileNoRails()<cr>
-map <leader>a :call RunTests('')<cr>
-" map <leader>c :w\|:!script/features<cr>
-" map <leader>w :w\|:!script/features --profile wip<cr>
-
-
-" All functions bellow from https://github.com/vim-scripts/Specky
-"
-" When in ruby code or an rspec BDD file, try and search recursively through
-" the filesystem (within the current working directory) to find the
-" respectively matching file.  (code to spec, spec to code.)
-"
-" This operates under the assumption that you've used chdir() to put vim into
-" the top level directory of your project.
 
 function! SpecSwitcher()
   " If we aren't in a ruby or rspec file then we probably don't care
@@ -469,3 +378,11 @@ vnoremap <leader>rrlv :RRenameLocalVariable<cr>
 vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 
+" vim-tmux-navigator bindings
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
