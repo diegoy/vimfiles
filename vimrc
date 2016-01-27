@@ -194,10 +194,10 @@ nmap <script> <silent> <unique> <Leader><Leader> :BufExplorer<CR>
 let g:bufExplorerShowRelativePath=1
 "let g:bufExplorerShowUnlisted=1
 
-" ack.vim
-nmap <silent> <unique> <Leader>a :Ack
-nmap <silent> <unique> <Leader>as :AckFromSearch
-nmap <silent> <unique> <Leader>af :AckFile
+" ag.vim
+nmap <silent> <unique> <Leader>a :Ag
+nmap <silent> <unique> <Leader>as :AgFromSearch
+nmap <silent> <unique> <Leader>af :AgFile
 
 " Tabularize
 "if exists(':Tabularize')
@@ -386,3 +386,6 @@ nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
+
+" copy filename to clipboard
+nnoremap <leader>f :let @+=expand('%:p')<cr>
