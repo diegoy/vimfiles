@@ -42,9 +42,8 @@ set completeopt=menu,preview
 set wildmenu                      " Enhanced command line completion.
 set wildmode=longest,list:longest " Complete files like a shell.
 
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,*.jpg,*.jpeg,*.png,*.gif,vendor/**,db/sphinx,log/**,tmp/**,public/uploads,coverage/**
-
-let g:ctrlp_custom_ignore = "vendor"
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,*.jpg,*.jpeg,*.png,*.gif,vendor/**,db/sphinx,log/**,tmp/**,public/uploads,coverage/**,node_modules/**,tmp/**
+let g:ctrlp_custom_ignore = '\v[\/](vendor|node_modules|tmp)'
 
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
